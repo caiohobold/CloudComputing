@@ -53,11 +53,11 @@ A tabela é criada automaticamente na inicialização (migrations do EF Core).
 ## Fase 2 — Security Groups (firewall)
 **EC2 → Security Groups → Create security group** (VPC padrão):
 
-1. `sg-app` (para a EC2), regras de **entrada**:
+1. `biblioteca-app-sg` (para a EC2), regras de **entrada**:
    - SSH · porta 22 · origem **My IP**
    - HTTP · porta 80 · origem **Anywhere-IPv4 (0.0.0.0/0)**
-2. `sg-db` (para o RDS), regra de **entrada**:
-   - PostgreSQL · porta 5432 · origem **o security group `sg-app`** (digite `sg-` e selecione)
+2. `biblioteca-db-sg` (para o RDS), regra de **entrada**:
+   - PostgreSQL · porta 5432 · origem **o security group `biblioteca-app-sg`** (digite `sg-` e selecione o `biblioteca-app-sg` na lista)
 
 > Assim, só a EC2 consegue falar com o banco. O banco não fica exposto na internet.
 
@@ -68,7 +68,7 @@ A tabela é criada automaticamente na inicialização (migrations do EF Core).
 - DB instance identifier: `biblioteca-db`
 - Master username: `postgres` · senha **sem `;` nem aspas** (anote!)
 - Instance class: `db.t3.micro` ou `db.t4g.micro` · Storage: 20 GB gp3, **desmarque autoscaling**
-- Connectivity: **Don't connect to an EC2** · VPC padrão · **Public access: No** · Security group: **`sg-db`** (remova o `default`)
+- Connectivity: **Don't connect to an EC2** · VPC padrão · **Public access: No** · Security group: **`biblioteca-db-sg`** (remova o `default`)
 - *Additional configuration*:
   - Initial database name: **`biblioteca`**
   - **Backup: Enable automated backups · retenção 7 dias**
@@ -78,7 +78,7 @@ A tabela é criada automaticamente na inicialização (migrations do EF Core).
 **EC2 → Launch instance**:
 - Nome: `biblioteca-app` · AMI: **Ubuntu Server 24.04 LTS** (x86) · Tipo: **t3.micro**
 - Key pair: **Create new** → `biblioteca-key` (.pem) → salve em local seguro
-- Network: **Select existing security group → `sg-app`**
+- Network: **Select existing security group → `biblioteca-app-sg`**
 - Storage: 8–20 GB gp3 → Launch.
 
 (Recomendado) **EC2 → Elastic IPs → Allocate → Associate** com a instância, para o IP não mudar.
