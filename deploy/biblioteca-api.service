@@ -1,0 +1,19 @@
+[Unit]
+Description=Biblioteca API (.NET 8)
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/var/www/biblioteca
+ExecStart=/usr/bin/dotnet /var/www/biblioteca/BibliotecaApi.dll
+Restart=always
+RestartSec=5
+SyslogIdentifier=biblioteca-api
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ASPNETCORE_URLS=http://127.0.0.1:5000
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+# Connection string do RDS (fora do repositório)
+EnvironmentFile=/etc/biblioteca-api.env
+
+[Install]
+WantedBy=multi-user.target

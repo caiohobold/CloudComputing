@@ -1,0 +1,43 @@
+@host = http://localhost:5034
+
+GET {{host}}/health
+
+###
+
+GET {{host}}/api/livros
+
+###
+
+GET {{host}}/api/livros?busca=tolkien
+
+###
+
+GET {{host}}/api/livros/1
+
+###
+
+POST {{host}}/api/livros
+Content-Type: application/json
+
+{
+  "titulo": "O Senhor dos Anéis",
+  "autor": "J.R.R. Tolkien",
+  "anoPublicacao": 1954,
+  "genero": "Fantasia"
+}
+
+###
+
+PUT {{host}}/api/livros/1
+Content-Type: application/json
+
+{
+  "titulo": "O Senhor dos Anéis: A Sociedade do Anel",
+  "autor": "J.R.R. Tolkien",
+  "anoPublicacao": 1954,
+  "genero": "Fantasia"
+}
+
+###
+
+DELETE {{host}}/api/livros/1

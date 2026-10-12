@@ -1,0 +1,17 @@
+docs
+
+# .NET
+bin/
+obj/
+publish/
+*.user
+.vs/
+.idea/
+.vscode/
+
+# Segredos — nunca commitar
+.env
+*.env
+*.pem
+
+.DS_Store
