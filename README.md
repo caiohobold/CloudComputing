@@ -44,7 +44,7 @@ A tabela é criada automaticamente na inicialização (migrations do EF Core).
 
 # Guia de deploy na AWS
 
-> Use **a mesma região** para tudo (ex.: `us-east-1`). Os nomes abaixo são sugestões.
+> Use **a mesma região** para tudo — neste projeto: **Estados Unidos (Ohio) · `us-east-2`**. Os nomes abaixo são sugestões.
 
 ## Fase 0 — Conta e segurança de custos
 1. Acesse o console da AWS.
